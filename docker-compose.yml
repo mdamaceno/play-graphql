@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  # app:
+  #   image: node:10.16.2
+  #   restart: always
+  #   command: "sh -c 'chown -R node:node /home/node/app && yarn && yarn watch'"
+  #   ports:
+  #     - "${APP_PORT:-4000}:4000"
+  #   volumes:
+  #     - ./:/home/node/app
+  #   working_dir: /home/node/app
+  #   depends_on:
+  #     - mongo
+
+  mongo:
+    image: mongo:4.0-xenial
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_db:/data/db
+
+volumes:
+  mongo_db:

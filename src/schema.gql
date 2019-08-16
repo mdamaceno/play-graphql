@@ -1,0 +1,32 @@
+scalar Date
+
+type Book {
+  id: Int!
+  title: String
+  author: String
+  movies: [Movie]
+}
+
+type Movie {
+  id: Int!
+  title: String
+  author: String
+  created_at: Date
+}
+
+type Person {
+  id: ID!
+  firstname: String
+  lastname: String
+  birthdate: Date
+  photo: String
+  created_at: Date
+  updated_at: Date
+  books: [Book]
+}
+
+type Query {
+  books: [Book]
+  movies: [Movie]
+  people: [Person]
+}
