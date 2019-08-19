@@ -1,36 +1,31 @@
-import books from '../data/books';
-import movies from '../data/movies';
+import { compact } from './helpers';
+import booksData from '../data/books';
+import moviesData from '../data/movies';
 import Person from './models/person';
 
-const getMethods = () => ({
-  books: getBooks,
-  movies: getMovies,
-  people: getPeople,
-  moviesByBook: getMoviesByBook
-})
+function getMethods () {
+  return compact(
+    books,
+    movies,
+    people,
+    moviesByBook
+  )
+}
 
-export const getBooks = async () => await books;
-
-export const getMovies = async () => await movies;
-
-export const getMoviesByBook = async (book) => {
+const books = async function () { return await booksData }
+const movies = async function () { return await moviesData }
+const people = async function  () { return await Person.find() }
+const moviesByBook = async function (book) {
   return await movies.filter(movie => movie.book_id == book.id);
 }
-export const getPeople = async () => await Person.find();
 
 export const mapFunctions = (pick = []) => {
-  let methods = getMethods();
+  let filtered = Object.keys(getMethods())
+    .filter(key => pick.includes(key))
+    .reduce((obj, key) => {
+      return getMethods()[key];
+    }, {});
 
-  if (pick.length > 0) {
-    const filtered = Object.keys(methods)
-      .filter(key => pick.includes(key))
-      .reduce((obj, key) => {
-        obj[key] = methods[key];
-        return obj;
-      }, {});
-
-    return filtered;
-  }
-
-  return methods;
+  return filtered;
 }
+

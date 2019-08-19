@@ -1,10 +1,12 @@
-import { mapFunctions, getMoviesByBook } from './functions';
+import { mapFunctions } from './functions';
 
 export const mapResolvers = {
   Query: {
-    ...mapFunctions(['books', 'movies', 'people'])
+    people: mapFunctions(['people']),
+    books: mapFunctions(['books']),
+    movies: mapFunctions(['movies']),
   },
   Book: {
-    movies: getMoviesByBook
+    movies: mapFunctions(['moviesByBook'])
   }
 }
