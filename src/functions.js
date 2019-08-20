@@ -8,7 +8,11 @@ function getMethods () {
     books,
     movies,
     people,
-    moviesByBook
+    moviesByBook,
+    getPerson,
+    createPerson,
+    deletePerson,
+    updatePerson
   )
 }
 
@@ -17,6 +21,18 @@ const movies = async function () { return await moviesData }
 const people = async function  () { return await Person.find() }
 const moviesByBook = async function (book) {
   return await movies.filter(movie => movie.book_id == book.id);
+}
+const getPerson = async function (parent, { id }) {
+  return await Person.findById(id);
+}
+const createPerson = async function (parent, { input }) {
+  return await Person(input).save();
+}
+const deletePerson = async function (parent, { id }) {
+  return await Person.findByIdAndDelete(id);
+}
+const updatePerson = async function (parent, { id, input }) {
+  return Person.findByIdAndUpdate(id, { $set: input });
 }
 
 export const mapFunctions = (pick = []) => {

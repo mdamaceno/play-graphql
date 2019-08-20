@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server';
 import fs from 'fs';
-import { GraphQLDate } from 'graphql-iso-date';
+import { GraphQLDate, GraphQLDateTime } from 'graphql-iso-date';
 import { mapResolvers } from './resolvers';
 
 /**
@@ -14,5 +14,6 @@ export const typeDefs = gql(require('./schema.gql'));
 
 export const resolvers = {
   Date: GraphQLDate,
+  DateTime: GraphQLDateTime,
   ...mapResolvers
 }

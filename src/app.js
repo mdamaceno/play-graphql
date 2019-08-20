@@ -8,7 +8,10 @@ import { typeDefs, resolvers } from './schema';
 dotenv.config();
 
 const createConnection = () => {
-  mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true })
+  mongoose.connect(process.env.DB_CONNECTION, {
+    useFindAndModify: false,
+    useNewUrlParser: true
+  })
     .catch((err) => {
       throw err;
     });

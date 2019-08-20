@@ -1,4 +1,25 @@
 scalar Date
+scalar DateTime
+
+type Query {
+  books: [Book]
+  movies: [Movie]
+  people: [Person]
+  person(id: ID!): Person
+}
+
+type Mutation {
+  createPerson(input: PersonInput!): Person
+  deletePerson(id: ID!): Person
+  updatePerson(id: ID!, input: PersonInput!): Person
+}
+
+input PersonInput {
+  firstname: String!
+  lastname: String!
+  birthdate: Date!
+  photo: String
+}
 
 type Book {
   id: Int!
@@ -16,17 +37,11 @@ type Movie {
 
 type Person {
   id: ID!
-  firstname: String
-  lastname: String
-  birthdate: Date
+  firstname: String!
+  lastname: String!
+  birthdate: Date!
   photo: String
-  created_at: Date
-  updated_at: Date
+  created_at: DateTime
+  updated_at: DateTime
   books: [Book]
-}
-
-type Query {
-  books: [Book]
-  movies: [Movie]
-  people: [Person]
 }

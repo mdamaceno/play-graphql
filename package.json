@@ -4,8 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "babel-node src/app.js",
-    "sucrase": "sucrase-node",
+    "dev": "sucrase-node src/app.js",
     "watch": "nodemon"
   },
   "dependencies": {
